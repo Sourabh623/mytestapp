@@ -1,10 +1,14 @@
 package com.mytestapp.repository;
 
+import com.mytestapp.StringUtils;
 import com.mytestapp.model.Person;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -16,24 +20,18 @@ class PersonRepositoryTest {
 
     @Test
     void is_Person_ExistById() {
-        
-        Person person = new Person(3,"abhi","indore");
-        Person savePerson = this.personRepository.save(person);
-
-        //expected
-        //Integer personId = 1;
-
         //actual result
-        Boolean actualResult = this.personRepository.isPersonExistById(savePerson.getPersonId());
+        Boolean actualResult = this.personRepository.isPersonExistById(1);
 
         //expected is true
         //Assertions.assertThat(actualResult).isTrue();
         assertEquals(true,actualResult);
     }
 
-    @AfterEach
-    void tearDown() {
-        System.out.println("this method run after test cases");
-        personRepository.deleteAll();
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
+    void testFindPersonNameByPersonId(Integer input, String expected){
+        Optional<Person> actualResult = this.personRepository.findPersonNameByPersonId(input);
+        assertEquals(expected,actualResult.get().getPersonName());
     }
 }

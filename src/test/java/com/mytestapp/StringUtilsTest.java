@@ -9,7 +9,6 @@ class StringUtilsTest {
 
     //check fun it can be throw the exception or not
     @Test
-    @DisplayName("ExceptionIsPresentOrNot")
     void testConvertStringToInteger() {
         //String value = null;
         String value = "";
