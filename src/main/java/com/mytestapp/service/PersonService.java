@@ -31,14 +31,13 @@ public class PersonService {
     }
 
     public String getNameById(Integer personId){
-        Optional<Person> person = Optional.of(this.personRepository.findPersonNameByPersonId(personId).get());
-        if(person==null) return null;
-        return person.map(Person::getPersonName).orElse(null);
+        Optional<Person> person = this.personRepository.findPersonNameByPersonId(personId);
+        return person.get().getPersonName();
     }
 
     //private method
-    private String getCityById(Integer personId){
-        Optional<Person> person = this.personRepository.findById(personId);
+    public String getCityById(Integer personId){
+        Optional<Person> person = this.personRepository.findPersonCityByPersonId(personId);
         return person.get().getPersonCity();
     }
 
@@ -47,5 +46,14 @@ public class PersonService {
         this.personRepository = personRepository1;
     }
 
+    //person list desc order
+    public List<Person> orderByDescPersonList(){
+        List<Person> persons = this.personRepository.personIdOrderByDesc();
+        return persons;
+    }
+    public List<Person> orderByDescPersonListUsingName(){
+            List<Person> persons = this.personRepository.personNameOrderByDesc();
+            return persons;
+        }
 
 }

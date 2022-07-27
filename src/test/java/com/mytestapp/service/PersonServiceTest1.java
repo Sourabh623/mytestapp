@@ -21,7 +21,7 @@ class PersonServiceTest1 {
     PersonRepository mockPersonRepositoryBean;
 
     @Test
-    void testGetNameById01(){
+    void testGetNameById(){
 
         //create a mock data for service layer testing functionality
         Optional<Person> person = Optional.of(new Person(101,"nick","indore"));
@@ -35,25 +35,19 @@ class PersonServiceTest1 {
         //check
         Assertions.assertEquals(actualResult,"nick");
     }
-    @Test
-    void testGetNameById02(){
 
+    @Test
+    void testGetCityById(){
         //create a mock data for service layer testing functionality
-        Optional<Person> person = Optional.of(new Person(102,"","bhopal"));
-        when(mockPersonRepositoryBean.findPersonNameByPersonId(102)).thenReturn(person);
+        Optional<Person> person = Optional.of(new Person(101,"nick","indore"));
+        when(mockPersonRepositoryBean.findPersonCityByPersonId(101)).thenReturn(person);
 
         //isolated component testing
         //inject the mock bean into the service layer
         PersonService personService = new PersonService(mockPersonRepositoryBean);
-        String actualResult = personService.getNameById(101);
+        String actualResult = personService.getCityById(101);
 
         //check
-        Assertions.assertEquals(actualResult,"");
-    }
-
-    @Test
-    void testGetCityById(){
-        PersonService personService = new PersonService();
-        PersonService spy = Mockito.spy(personService);
+        Assertions.assertEquals(actualResult,"indore");
     }
 }

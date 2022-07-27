@@ -34,4 +34,13 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAllPerson(){
         return ResponseEntity.ok(this.personService.getAllPerson());
     }
+
+    @GetMapping("/orderByDescPerson")
+    public ResponseEntity<List<Person>> orderByDescPersonList(){
+        return ResponseEntity.ok(this.personService.orderByDescPersonList());
+    }
+    @GetMapping("/orderByDescPersonUsingName")
+    public ResponseEntity<List<Person>> orderByDescPersonListUsingName(){
+        return ResponseEntity.ok(this.personService.orderByDescPersonListUsingName());
+    }
 }
