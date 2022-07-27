@@ -1,6 +1,5 @@
 package com.mytestapp.repository;
 
-import com.mytestapp.StringUtils;
 import com.mytestapp.model.Person;
 
 import org.junit.jupiter.api.*;

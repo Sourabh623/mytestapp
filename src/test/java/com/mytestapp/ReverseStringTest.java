@@ -16,7 +16,7 @@ class ReverseStringTest {
         assertTrue(actualResult);
     }
     @ParameterizedTest
-    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/data1.csv", numLinesToSkip = 1)
     void palindromeUsingFile(String str) {
         ReverseString reverseString = new ReverseString();
         Boolean actualResult = reverseString.Palindrome(str);
