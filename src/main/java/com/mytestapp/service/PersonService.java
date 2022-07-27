@@ -32,6 +32,7 @@ public class PersonService {
 
     public String getNameById(Integer personId){
         Optional<Person> person = Optional.of(this.personRepository.findPersonNameByPersonId(personId).get());
+        if(person==null) return null;
         return person.map(Person::getPersonName).orElse(null);
     }
 

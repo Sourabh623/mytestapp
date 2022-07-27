@@ -3,7 +3,6 @@ package com.mytestapp.service;
 import com.mytestapp.model.Person;
 import com.mytestapp.repository.PersonRepository;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static  org.mockito.Mockito.when;
@@ -22,17 +21,34 @@ class PersonServiceTest1 {
     PersonRepository mockPersonRepositoryBean;
 
     @Test
-    void testGetNameById(){
+    void testGetNameById01(){
 
         //create a mock data for service layer testing functionality
-        Optional<Person> person = Optional.of(new Person());
-        person.get().setPersonName("nick");
+        Optional<Person> person = Optional.of(new Person(101,"nick","indore"));
         when(mockPersonRepositoryBean.findPersonNameByPersonId(101)).thenReturn(person);
 
         //isolated component testing
         //inject the mock bean into the service layer
         PersonService personService = new PersonService(mockPersonRepositoryBean);
         String actualResult = personService.getNameById(101);
+
+        //check
+        Assertions.assertEquals(actualResult,"nick");
+    }
+    @Test
+    void testGetNameById02(){
+
+        //create a mock data for service layer testing functionality
+        Optional<Person> person = Optional.of(new Person(102,"","bhopal"));
+        when(mockPersonRepositoryBean.findPersonNameByPersonId(102)).thenReturn(person);
+
+        //isolated component testing
+        //inject the mock bean into the service layer
+        PersonService personService = new PersonService(mockPersonRepositoryBean);
+        String actualResult = personService.getNameById(101);
+
+        //check
+        Assertions.assertEquals(actualResult,"");
     }
 
     @Test
